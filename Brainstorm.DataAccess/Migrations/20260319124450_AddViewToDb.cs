@@ -18,8 +18,7 @@ namespace Brainstorm.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VisitTime = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IdeaId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    IdeaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +30,10 @@ namespace Brainstorm.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Views_Ideas_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_Views_Ideas_IdeaId",
+                        column: x => x.IdeaId,
                         principalTable: "Ideas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -44,9 +42,9 @@ namespace Brainstorm.DataAccess.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Views_ProductId",
+                name: "IX_Views_IdeaId",
                 table: "Views",
-                column: "ProductId");
+                column: "IdeaId");
         }
 
         /// <inheritdoc />

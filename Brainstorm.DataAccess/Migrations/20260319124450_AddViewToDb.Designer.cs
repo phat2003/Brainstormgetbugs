@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Brainstorm.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260319120424_AddViewToDb")]
+    [Migration("20260319124450_AddViewToDb")]
     partial class AddViewToDb
     {
         /// <inheritdoc />
@@ -136,9 +136,6 @@ namespace Brainstorm.DataAccess.Migrations
                     b.Property<int>("IdeaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("VisitTime")
                         .HasColumnType("int");
 
@@ -146,7 +143,7 @@ namespace Brainstorm.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("IdeaId");
 
                     b.ToTable("Views");
                 });
@@ -408,8 +405,8 @@ namespace Brainstorm.DataAccess.Migrations
 
                     b.HasOne("Brainstorm.Models.Idea", "Idea")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdeaId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");

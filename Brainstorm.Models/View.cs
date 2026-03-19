@@ -17,7 +17,7 @@ namespace Brainstorm.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
         public int IdeaId { get; set; }
-        [ForeignKey("ProductId")]
+        [ForeignKey("IdeaId")]
         [ValidateNever]
         public Idea Idea { get; set; }
     }

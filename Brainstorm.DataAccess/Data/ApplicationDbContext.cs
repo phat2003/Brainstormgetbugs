@@ -21,5 +21,17 @@ namespace Brainstorm.DataAccess.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<View> Views { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Đừng quên gọi base.OnModelCreating vì chúng ta đang kế thừa từ IdentityDbContext
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<View>()
+                .HasOne(v => v.Idea)
+                .WithMany()
+                .HasForeignKey(v => v.IdeaId)
+                .OnDelete(DeleteBehavior.NoAction); // Tắt tính năng tự động xóa (Cascade Delete) ở nhánh này
+        }
     }
 }

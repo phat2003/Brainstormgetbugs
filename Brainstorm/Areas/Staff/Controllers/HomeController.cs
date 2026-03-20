@@ -132,7 +132,8 @@ namespace Brainstorm.Areas.Staff.Controllers
 
             return View(obj);
         }
-        public IActionResult Delete(int? id)
+
+        public IActionResult ViewDetails(int? id)
         {
             if (id == null || id == 0)
             {
@@ -145,49 +146,22 @@ namespace Brainstorm.Areas.Staff.Controllers
             }
             return View(ideaFromDbFirst);
         }
-        [HttpPost]
-        public IActionResult DeletePost(int? id)
-        {
-            var obj = _unitOfWork.Idea.GetFirstOrDefault(u => u.Id == id);
 
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                if (obj.FilePath != null)
-                {
-                    string wwwRootPath = _webHostEnvironment.WebRootPath;
-                    //this is an edit and we need to remove old image
-                    var oldImagePath = Path.Combine(wwwRootPath, obj.FilePath.TrimStart('\\'));
-                    if (System.IO.File.Exists(oldImagePath))
-                    {
-                        System.IO.File.Delete(oldImagePath);
-                    }
-                }
-                _unitOfWork.Idea.Remove(obj);
-                _unitOfWork.Save();
-                TempData["Sucess"] = "Category Delete sucessfully";
-                return RedirectToAction("index");
-
-            }
-            return View(obj);
-        }
 
         public IActionResult Views(int id)
         {
+            
             View viewObj = new()
             {
                 Idea = _unitOfWork.Idea.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,Topic,ApplicationUser"),
                 VisitTime = 1,
                 IdeaId = id
             };
+            
             //if (id == null || id == 0)
             //{
             //    return NotFound();
             //}
-
             //if (viewObj == null)
             //{
             //    return NotFound();

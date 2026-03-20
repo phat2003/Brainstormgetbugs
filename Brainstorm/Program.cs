@@ -1,4 +1,4 @@
-using Brainstorm.DataAccess.Data;
+﻿using Brainstorm.DataAccess.Data;
 using Brainstorm.DataAccess.Repository.IRepository;
 using Brainstorm.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +20,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProvid
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 
 var app = builder.Build();
 

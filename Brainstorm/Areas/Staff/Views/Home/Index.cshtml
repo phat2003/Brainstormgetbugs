@@ -31,10 +31,14 @@
                     <button class="btn btn-outline-secondary btn-sm" disabled>
                         <i class="bi bi-chat-dots"></i> Bình luận
                     </button>
+
                     <form asp-action="Views" method="post">
+                        <input type="hidden" name="IdeaId" value="@idea.Id" />
+
+                        <input type="hidden" name="VisitTime" value="1" />
+
                         <button type="submit" class="btn btn-danger">
                             Views
-
                         </button>
                     </form>
                 </div>
